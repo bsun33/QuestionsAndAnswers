@@ -2,28 +2,42 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Request;
+use Hash;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    //sign up
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    public function signup()
+    {
+        $username = Request::get('username');
+        $password = Request::get('password');
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+        /*check if username or password is empty in requests*/
+        if(!$username || !$password)
+            return err('user name and password can not be blank');
+
+        /*check if user exists*/
+        $user_exist = $this->where('username', $username)
+                            ->exists();
+
+        if($user_exist)
+            return success(['msg' => 'username already exists']);
+
+        /*encrypt password*/
+        $hashed_password = Hash::make($password);
+
+        /*save to db*/
+        $user = $this;
+        $user->password = $hashed_password;
+        $user->username = $username;
+
+        if($user->save())
+            return success(['user_id' => $user->id]);
+        else
+            return err('db insert failed');
+
+    }
 }

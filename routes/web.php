@@ -11,6 +11,29 @@
 |
 */
 
+function err($msg = null)
+{
+    return ['status' => 0, 'msg' => $msg];
+}
+
+function success($data_to_merge = null)
+{
+    $data = ['status' => 1];
+    if($data_to_merge)
+        $data = array_merge($data, $data_to_merge);
+    return $data;
+}
+
+//return user instance
+function user_ins(){
+    return new App\User;
+}
+
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::any('api/user/signup', function () {
+    return user_ins()->signup();
+
 });
