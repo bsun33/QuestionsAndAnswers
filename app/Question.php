@@ -64,6 +64,49 @@ class Question extends Model
 
     public function read()
     {
-        return 1;
+        /*check if there is id in request params, if exists, return that specific question*/
+        if(rq('id'))
+            return success([$this->find(rq('id'))]);
+
+        /*if client send how many entries to display on one page,
+         * use that
+        */
+        $limit = rq('limit') ?:15;
+
+        /*skip use for paging*/
+        $skip = (rq('page') ? (rq('page') - 1) : 0) * $limit;
+
+        /*get a collection, only displays fileds that are passed in get*/
+        return $this->orderBy('created_at')
+                    ->limit($limit)
+                    ->skip($skip)
+                    ->get(['id', 'title', 'desc', 'user_id'])
+                    ->keyBy('id');
+    }
+
+    /*remove questions*/
+    public function remove()
+    {
+        /*check if user logged in*/
+        if(!user_ins()->is_logged_in())
+            return err('logging required');
+
+        /*check if question id is sent in request*/
+        if(!rq('id'))
+            return err('question id is required');
+
+        /*find the corresponding question model matching with passed question_id*/
+        $question = $this->find(rq('id'));
+
+        if(!$question)
+            return err('question not exists!');
+
+        /*check if the question belongs to the current user*/
+        if($question->user_id != session('user_id'))
+            return err('permission denied');
+
+        return $question->delete() ?
+            success() :
+            err('db delete failed');
     }
 }

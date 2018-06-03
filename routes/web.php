@@ -74,6 +74,11 @@ Route::any('api/questions/read', function () {
 
 });
 
+Route::any('api/questions/remove', function () {
+    return question_ins()->remove();
+
+});
+
 Route::any('test', function () {
     return user_ins()->is_logged_in();
 
