@@ -11,6 +11,13 @@
 |
 */
 
+function rq($key=null, $default=null)
+{
+    if(!$key)
+        return Request::all();
+    return Request::get($key, $default);
+}
+
 function err($msg = null)
 {
     return ['status' => 0, 'msg' => $msg];
@@ -29,11 +36,45 @@ function user_ins(){
     return new App\User;
 }
 
+function question_ins(){
+    return new App\Question;
+}
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::any('api/user/signup', function () {
+Route::any('api/signup', function () {
     return user_ins()->signup();
+
+});
+
+Route::any('api/login', function () {
+    return user_ins()->login();
+
+});
+
+Route::any('api/logout', function () {
+    return user_ins()->logout();
+
+});
+
+Route::any('api/questions/add', function () {
+    return question_ins()->add();
+
+});
+
+Route::any('api/questions/change', function () {
+    return question_ins()->change();
+
+});
+
+Route::any('api/questions/read', function () {
+    return question_ins()->read();
+
+});
+
+Route::any('test', function () {
+    return user_ins()->is_logged_in();
 
 });

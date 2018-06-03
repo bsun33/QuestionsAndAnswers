@@ -17,5 +17,13 @@ $ php artisan make:model model_name
 
 
 -------Routes--------
+-User Model:
+    /api/signup
+    /api/login
+    /api/logout
 
-/api/user/signup
+-Question Model:
+    /api/questions/add
+    /api/questions/change
+    /api/questions/read
+
