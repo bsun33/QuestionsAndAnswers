@@ -33,6 +33,9 @@ $ php artisan make:model model_name
     /api/questions/change   ?id
 
     /api/questions/read     ?(id) & (limit) & (page)
-    
+
     /api/questions/remove   ?id
 
+-Answer Model:
+
+    /api/answer/add  ?question_id & content
