@@ -98,10 +98,6 @@ Route::any('api/answer/read', function () {
 
 });
 
-Route::any('api/answer/remove', function () {
-    return answer_ins()->remove();
-
-});
 
 Route::any('test', function () {
     return user_ins()->is_logged_in();

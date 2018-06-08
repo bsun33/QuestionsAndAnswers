@@ -39,3 +39,7 @@ $ php artisan make:model model_name
 -Answer Model:
 
     /api/answer/add  ?question_id & content
+
+    /api/answer/change  ?answer_id & content
+
+    /api/answer/change  ?answer_id || question_id
