@@ -102,7 +102,7 @@ class User extends Model
     public function is_logged_in()
     {
         /*if user_id exists in session, return it, otherwise return false*/
-       return session('user_id') ? : 'Not logged in';
+       return session('user_id') ? : 0;
     }
 
 

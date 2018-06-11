@@ -8,7 +8,9 @@ $ php -S localhost:8080 -t public
 -------migration--------
 
 $ php artisan make:migration create_table_tableName --create=tableName
+
 $ php artisan migrate
+
 $ php artisan migrate:rollback
 
 -------make model--------
@@ -42,4 +44,14 @@ $ php artisan make:model model_name
 
     /api/answer/change  ?answer_id & content
 
-    /api/answer/change  ?answer_id || question_id
+    /api/answer/read  ?answer_id || question_id
+
+-Comment Model:
+
+    /api/comment/add    ?content
+
+
+
+Angular:
+
+$ npm install angular jquery angular-ui-router normalize-css
