@@ -105,5 +105,17 @@ class User extends Model
        return session('user_id') ? : 0;
     }
 
+    public function answer()
+    {
+        return $this->belongsToMany('App\Answer')
+                    ->withPivot('vote')
+                    ->withTimestamps();
+    }
+
+    public function exist()
+    {
+        return success(['count' => $this->where(rq())->count()]);
+    }
+
 
 }

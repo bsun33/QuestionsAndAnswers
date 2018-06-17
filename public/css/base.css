@@ -1,3 +1,139 @@
-body {
-    background-color: #1b6d85;
+*
+{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+body{
+    background: #eee;
+}
+
+h1{
+    font-size:20px;
+    margin-top:0px;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    clear: both;
+    display: table;
+}
+
+.navbar {
+    background: #a10;
+    color: #fff;
+}
+
+.navbar a {
+    color: #fff;
+}
+
+.navbar-item {
+    display: inline-block;
+    line-height: 2;
+    padding: 2px 2px;
+}
+
+.navbar-item:first-child
+{
+    margin-left: 4px;
+}
+
+.navbar-item:last-child
+{
+    margin-right: 4px;
+}
+
+.navbar .brand {
+    font-size: 20px;
+    padding-top: 0;
+    line-height:1;
+    font-weight: 600;
+}
+
+.container {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word；
+}
+
+.container.signup,
+.container.login,
+.container.reset-password
+{
+    width: 400px;
+    margin-top:15px;
+
+}
+
+[ui-sref] {
+    cursor: pointer;
+}
+
+form,
+label {
+    display: block;
+}
+
+label
+{
+    margin: 4px 0px;
+}
+
+.input-error-set
+{
+    color: red;
+    margin: 4px 0; 
+}
+
+.card {
+    display: block;
+    padding: 10px 6px;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shoadow: 0 1px 2px 1px rgba(0,0,0,0.1);
+}
+
+input{
+    display: block;
+    width:100%;
+    padding: 5px;
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.input-group
+{
+    margin-bottom: 10px;
+}
+
+button{
+    border: 1px solid rgba(0,0,0,0.1);
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+input button{
+    padding: 5px;
 }

@@ -49,7 +49,7 @@ function comment_ins(){
 }
 
 Route::get('/', function () {
-    return view('view');
+    return view('index');
 });
 
 Route::any('api/signup', function () {
@@ -64,6 +64,11 @@ Route::any('api/login', function () {
 
 Route::any('api/logout', function () {
     return user_ins()->logout();
+
+});
+
+Route::any('api/user/exist', function () {
+    return user_ins()->exist();
 
 });
 
@@ -102,11 +107,25 @@ Route::any('api/answer/read', function () {
 
 });
 
+Route::any('api/answer/vote', function () {
+    return answer_ins()->vote();
+
+});
+
 Route::any('api/comment/add', function () {
     return comment_ins()->add();
 
 });
 
+Route::any('api/comment/read', function () {
+    return comment_ins()->read();
+
+});
+
+Route::any('api/comment/remove', function () {
+    return comment_ins()->remove();
+
+});
 
 Route::any('test', function () {
     return user_ins()->is_logged_in();

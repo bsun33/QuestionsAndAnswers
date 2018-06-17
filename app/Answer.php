@@ -91,4 +91,43 @@ class Answer extends Model
 
         return success(['data' => $answers]);
     }
+    /*vote api*/
+    public function vote()
+    {
+        /*check if user logged in*/
+        if(!user_ins()->is_logged_in())
+            return err('logging required');
+
+        if(!rq('answer_id') || !rq('vote'))
+            return err('answer_id and vote should not be blank');
+
+        $answer = $this->find(rq('answer_id'));
+
+        if(!$answer)
+            return err('answer not exist');
+
+        /*1 - agree, 2- object*/
+        $vote = rq('vote') <= 1 ? 1 : 2;
+
+        /*check if the user has already voted for the answer,
+        * if voted before, delete the vote.
+        */
+        $vote_ins = $answer->users()
+                ->newPivotStatement()
+                ->where('user_id', session('user_id'))
+                ->where('answer_id', rq('answer_id'))
+                ->delete();
+
+        /*add record in answer_user table*/
+        $answer->users()->attach(session('user_id'),['vote' => $vote]);
+
+        return success();
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User')
+                    ->withPivot('vote')
+                    ->withTimestamps();
+    }
 }

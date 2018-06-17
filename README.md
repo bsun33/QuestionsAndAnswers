@@ -48,6 +48,8 @@ $ php artisan make:model model_name
 
     /api/answer/read  ?answer_id || question_id
 
+    /api/answer/vote   ?answer_id & vote
+
 -Comment Model:
 
     /api/comment/add    ?content & (answer_id || question_id) || reply_to

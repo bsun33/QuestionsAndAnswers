@@ -64,5 +64,59 @@ class Comment extends Model
             err('db insert failed');
     }
 
+    /*check comments*/
+    public function read()
+    {
+         if(!rq('question_id') && !rq('answer_id'))
+            return err('question_id or answer_id is required');
+
+         if(rq('question_id'))
+         {
+             /*comment to questions*/
+             $question = question_ins()->find(rq('question_id'));
+             if(!$question)
+                 return err('question not exists');
+
+             $data = $this->where('question_id', rq('question_id'))
+                          ->get();
+         }
+         else
+         {
+            $answer = answer_ins()->find(rq('answer_id'));
+            if(!$answer)
+                return err('answer not exists');
+
+            $data = $this->where('answer_id', rq('answer_id'))
+                         ->get();
+         }
+
+         return success(['data' => $data->keyBy('id')]);
+    }
+
+    /*remove comment*/
+    public function remove()
+    {
+        /*check if user logged in*/
+        if(!user_ins()->is_logged_in())
+            return err('logging required');
+
+        if(!rq('comment_id'))
+            return err('comment id is required');
+
+        $comment = $this->find(rq('comment_id'));
+
+        if(!$comment)
+            return err('comment not exists');
+
+        if($comment->user_id != session('user_id'))
+            return err('permission denied');
+
+        /*remove all comments that reply to the target comment*/
+        $this->where('reply_to', rq('comment_id'))->delete();
+
+        return $comment->delete() ?
+            success() :
+            err('db delete failed');
+    }
 
 }
