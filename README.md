@@ -1,6 +1,6 @@
 Question and Answers platform
 
-![image](http://github.com/bsun33/QuestionsAndAnswers/raw/master/qa.png)
+![image](https://github.com/bsun33/QuestionsAndAnswers/raw/master/qa.png)
 
 
 -------test in local-------
