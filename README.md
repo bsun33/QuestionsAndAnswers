@@ -1,5 +1,7 @@
 Question and Answers platform
 
+![image](http://github.com/bsun33/QuestionsAndAnswers/raw/master/qa.png
+
 
 -------test in local-------
 
@@ -48,7 +50,9 @@ $ php artisan make:model model_name
 
 -Comment Model:
 
-    /api/comment/add    ?content
+    /api/comment/add    ?content & (answer_id || question_id) || reply_to
+
+    /api/comment/read   ?(answer_id || question_id)
 
 
 
